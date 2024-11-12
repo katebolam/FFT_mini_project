@@ -14,17 +14,22 @@ def plot_execution_times(problem_sizes, execution_times, labels, title, xlabel, 
     """
     for times, label in zip(execution_times, labels):
         plt.plot(
-            problem_sizes, times, marker='s', color='black', linestyle='-', linewidth=0.5,
+            problem_sizes, times, marker='s', linestyle='-', linewidth=0.5, color = 'black',
             markersize=2, label=label
         )  
-    plt.xscale('log')
-    plt.xticks(problem_sizes, labels=[str(size) for size in problem_sizes])
+    plt.xscale('log')  # Logarithmic scale for problem sizes
+    
+    # Generate labels as powers of 2
+    indices_of_2 = [f"{i}" for i in range(len(problem_sizes))]
+    plt.xticks(problem_sizes, labels=indices_of_2)
+    
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.minorticks_off() 
+    plt.tight_layout()
     plt.show()
-
+    
 def plot_speedup(problem_sizes, serial_times, parallel_times, labels):
     """
     Plots speedup for parallel implementations compared to serial times.
