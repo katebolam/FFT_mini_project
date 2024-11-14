@@ -18,6 +18,7 @@ size = comm.Get_size()
 # Define the problem sizes as powers of 2 from 2^2 to 2^12
 problem_sizes = [2**i for i in range(2, 13)]  # Start from 2 to avoid issues with size 1
 execution_times = []  # To store mean execution times for each problem size
+valid_sizes = []  # To store valid problem sizes for plotting
 
 # Number of runs for averaging
 num_runs = 10
@@ -25,7 +26,8 @@ num_runs = 10
 # Scatter and collect times for each problem size
 for N in problem_sizes:
     # Ensure the data size is divisible by the number of processes
-    if N % size != 0:
+    rows_per_process = N // size
+    if rows_per_process == 0:
         print(f"Warning: N={N} is too small for {size} processes. Skipping...")
         continue
 
@@ -34,46 +36,40 @@ for N in problem_sizes:
         data = np.random.random((N, N))  # Generate 2D random data for FFT
     
     # Scatter the data to all processes
-    chunk_size = N * N // size  # Total data size for each process
+    chunk_size = N * rows_per_process  # Total data size for each process
     local_data = np.zeros(chunk_size, dtype=np.float64)
     comm.Scatter(data.flatten() if rank == 0 else None, local_data, root=0)
 
-    # Reshape the local data to a 2D matrix (this is the key fix)
-    rows_per_process = N // size  # Rows each process will handle
+    # Reshape the local data to a 2D matrix
     local_data_reshaped = local_data.reshape((rows_per_process, N))
 
     # Perform the FFT on the local chunk of data
-    try:
-        local_fft = fft2(local_data_reshaped)
-    except Exception as e:
-        print(f"Error computing FFT for process {rank}: {e}")
-        local_fft = None
+    local_fft = fft2(local_data_reshaped)
 
-    # Check if local_fft is None
-    if local_fft is None:
-        print(f"Rank {rank} encountered an error in FFT calculation. Skipping FFT.")
-    else:
-        # Gather the results from all processes
-        global_fft = None
-        if rank == 0:
-            global_fft = np.zeros((N, N), dtype=np.complex128)
-        
-        comm.Gather(local_fft.flatten(), global_fft.flatten(), root=0)
+    # Gather the results from all processes
+    global_fft = None
+    if rank == 0:
+        global_fft = np.zeros((N, N), dtype=np.complex128)
+    comm.Gather(local_fft, global_fft if rank == 0 else None, root=0)
 
-        # Measure execution time over multiple runs and calculate mean
-        if rank == 0:
-            times = [time_function(fft2, data) for _ in range(num_runs)]
-            mean_time = np.mean(times)
-            execution_times.append(mean_time)
-            print(f"2D (MPI) FFT Execution Time for N={N}: {mean_time:.10f} seconds")
+    # Measure execution time over multiple runs and calculate mean
+    if rank == 0:
+        times = [time_function(fft2, data) for _ in range(num_runs)]
+        mean_time = np.mean(times)
+        execution_times.append(mean_time)
+        valid_sizes.append(N)  # Add only valid N values
+        print(f"2D (MPI) FFT Execution Time for N={N}: {mean_time:.10f} seconds")
 
-# Plot the execution times
-if rank == 0:
+# Plot the execution times only if execution_times has data
+if rank == 0 and execution_times:
     plot_execution_times(
-        problem_sizes,
+        valid_sizes,  # Use valid sizes that were processed
         [execution_times],  
         labels=["MPI 2D FFT"], 
         title="2D FFT MPI Execution Time vs. Problem Size",
         xlabel="Problem Size (2^N)",
         ylabel="Execution Time (seconds)"
     )
+else:
+    if rank == 0:
+        print("No data to plot.")
