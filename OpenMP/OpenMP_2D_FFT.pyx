@@ -1,46 +1,38 @@
+# cython: language_level=3
+# cython: boundscheck=False
+# cython: wraparound=False
+# cython: cdivision=True
+
+from cython.parallel import prange
 import numpy as np
 cimport numpy as np
-from cython.parallel import prange
-from libc.math cimport cos, sin, M_PI
-cimport openmp
+from libc.math cimport exp, M_PI, cos, sin
 
-# 2D FFT function with OpenMP
-def fft_2d_parallel(np.ndarray[double] data):
-    cdef int N, M, i, j, n
-    N, M = data.shape  # Get dimensions of the 2D array
-    cdef double complex_even, complex_odd, twiddle_real, twiddle_imag
+def fft_2d_parallel(np.ndarray[np.float64_t, ndim=2] data):
+    cdef int Nx = data.shape[0]
+    cdef int Ny = data.shape[1]
+    cdef np.ndarray[np.complex128_t, ndim=2] output = np.empty((Nx, Ny), dtype=np.complex128)
+    cdef int kx, ky, n, m
+    cdef double angle_real, angle_imag, cos_val, sin_val
 
-    # Output arrays for real and imaginary parts
-    cdef np.ndarray[double] output_real = np.empty((N, M), dtype=np.float64)
-    cdef np.ndarray[double] output_imag = np.empty((N, M), dtype=np.float64)
+    # Temporary arrays for real and imaginary components
+    cdef np.ndarray[np.float64_t, ndim=2] temp_real = np.zeros((Nx, Ny), dtype=np.float64)
+    cdef np.ndarray[np.float64_t, ndim=2] temp_imag = np.zeros((Nx, Ny), dtype=np.float64)
 
-    # Parallelize row-wise FFT
+    # Parallel loop for the Fourier transform
     with nogil:
-        for i in prange(N, schedule='dynamic', num_threads=4): 
-            for j in range(M):
-                complex_even = 0.0
-                complex_odd = 0.0
-                for n in range(N):
-                    twiddle_real = cos(-2.0 * M_PI * i * n / N)
-                    twiddle_imag = sin(-2.0 * M_PI * i * n / N)
-                    complex_even += data[n, j] * twiddle_real
-                    complex_odd += data[n, j] * twiddle_imag
-                output_real[i, j] = complex_even
-                output_imag[i, j] = complex_odd
+        for kx in prange(Nx, schedule='dynamic', num_threads=4):
+            for ky in range(Ny):
+                for n in range(Nx):
+                    for m in range(Ny):
+                        angle_real = cos(-2.0 * M_PI * (kx * n / Nx + ky * m / Ny))
+                        angle_imag = sin(-2.0 * M_PI * (kx * n / Nx + ky * m / Ny))
+                        temp_real[kx, ky] += data[n, m] * angle_real
+                        temp_imag[kx, ky] += data[n, m] * angle_imag
 
-    # Parallelize column-wise FFT
-    with nogil:
-        for j in prange(M, schedule='dynamic', num_threads=4): 
-            for i in range(N):
-                complex_even = 0.0
-                complex_odd = 0.0
-                for n in range(M):
-                    twiddle_real = cos(-2.0 * M_PI * j * n / M)
-                    twiddle_imag = sin(-2.0 * M_PI * j * n / M)
-                    complex_even += data[i, n] * twiddle_real
-                    complex_odd += data[i, n] * twiddle_imag
-                output_real[i, j] = complex_even
-                output_imag[i, j] = complex_odd
+    # Combine the temporary real and imaginary parts
+    for kx in range(Nx):
+        for ky in range(Ny):
+            output[kx, ky] = temp_real[kx, ky] + 1j * temp_imag[kx, ky]
 
-    # Combine real and imaginary parts
-    return output_real + 1j * output_imag
+    return output
