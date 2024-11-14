@@ -79,6 +79,15 @@ Example commands to build and execute:
 - To run the 1D MPI FFT:
   ```bash
   mpiexec -np <num_processes> python MPI/1D_MPI_FFT.py
+- To run the 2D MPI FFT:
+  ```bash
+  mpiexec -np <num_processes> python MPI/2D_MPI_FFT.py
+- To run the 1D multiprocessing FFT:
+  ```bash
+  python multiprocessing/1D_multiprocessing_FFT.py
+- To run the 2D multiprocessing FFT: 
+```bash
+  python multiprocessing/2D_multiprocessing_FFT.py
 
 ## Benchmarking
 The purpose of this program is to benchmark parallelization strategies of the Cooley-Tukey FFT algorithm. Each parallel implementation measures and records 
