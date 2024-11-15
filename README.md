@@ -6,7 +6,7 @@ Parallelization of Fast Fourier Transform Algorithm and understand how the algor
 
 This repository contains an implementation of the radix-2 Cooley-Tukey Fast Fourier Transform (FFT) algorithm, parallelized to run on both shared and distributed memory architectures. The project explores different parallelization techniques, developed and tested in the context of both four-core PC and high-performance computing environments.
 
-The project includes four main strands, each supporting both 1D and 2D FFTs:
+The project includes five main strands, each supporting both 1D and 2D FFTs:
 
 1. **Shared Memory Systems with OpenMP**
    - Suitable for single or dual-socket CPU systems.
