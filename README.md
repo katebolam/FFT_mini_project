@@ -1,10 +1,10 @@
-# Parallelizing FFTs
+# Parallelizing the Fast Fourier Transform Algorithm
 
-Parallel Fast Fourier Transforms
+Parallelization of Fast Fourier Transform Algorithm and understand how the algorithm perfomance scales with degree of parallelization and problem size.
 
 ## Overview
 
-This repository contains an implementation of the radix-2 Cooley-Tukey Fast Fourier Transform (FFT) algorithm, parallelized to run on both shared memory (multicore) and distributed memory (multisocket) architectures. The project explores different parallelization techniques, developed and tested in the context of both four-core PC and high-performance computing environments.
+This repository contains an implementation of the radix-2 Cooley-Tukey Fast Fourier Transform (FFT) algorithm, parallelized to run on both shared and distributed memory architectures. The project explores different parallelization techniques, developed and tested in the context of both four-core PC and high-performance computing environments.
 
 The project includes four main strands, each supporting both 1D and 2D FFTs:
 
@@ -91,7 +91,8 @@ Example commands to build and execute:
 - To run the 2D multiprocessing FFT: 
 ```bash
   python multiprocessing/2D_multiprocessing_FFT.py
-
+```
 ## Benchmarking
 The purpose of this program is to benchmark parallelization strategies of the Cooley-Tukey FFT algorithm. Each parallel implementation measures and records 
 execution time for a range of problem sizes (powers of 2), which can be plotted for performance analysis.
+
