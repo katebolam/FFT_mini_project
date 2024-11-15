@@ -19,13 +19,22 @@ The project includes four main strands, each supporting both 1D and 2D FFTs:
 3. **Multiprocessing for Shared Memory Systems**
    - Uses Python’s multiprocessing module to achieve parallelism on multicore systems without OpenMP.
    - Supports both 1D and 2D FFTs.
+   
+4. **Numba JIT Parallelization**
+   - Implements FFTs using Numba's Just-In-Time (JIT) compiler with support for multithreading through `prange`.
+   - Explores shared memory parallelism via efficient machine code generation for Python.
+   - Supports both 1D and 2D FFTs.
 
-4. **Serial (Baseline) Implementation**
+5. **Serial (Baseline) Implementation**
    - Provides a serial version of the FFT for benchmarking and comparison.
 
 ## Structure
 
 This repository is organized into the following directories:
+
+- **`JIT/`**: Contains Numba JIT-based implementations for shared memory parallelization.
+  - `1D_JIT_FFT.py`: Parallelized 1D FFT using Numba JIT.
+  - `2D_JIT_FFT.py`: Parallelized 2D FFT using Numba JIT.
 
 - **`MPI/`**: Contains MPI-based implementations for both 1D and 2D FFTs, targeting distributed memory systems.
   - `1D_MPI_FFT.py`: MPI parallelized 1D FFT.
@@ -79,6 +88,12 @@ Example commands to build and execute:
 - To run the 2D OpenMP FFT:
   ```bash
   python OpenMP/test_2D_OpenMP_FFT.py
+- To run the 1D JIT FFT:
+  ```bash
+  python JIT/1D_JIT_FFT.py
+- To run the 2D JIT FFT:
+  ```bash
+  python JIT/2D_JIT_FFT.py
 - To run the 1D MPI FFT:
   ```bash
   mpiexec -np <num_processes> python MPI/1D_MPI_FFT.py
