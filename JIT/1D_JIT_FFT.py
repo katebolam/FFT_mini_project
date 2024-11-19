@@ -1,18 +1,11 @@
-# This script implements a 1D fast-fourier transform (FFT) using Numba's Just-In-Time (JIT) compiler,
-# and stores and plots the execution times as a function of problem size (N).
-
 import sys
 import os
 from numba import jit, prange
 import math
 import time
-import matplotlib.pyplot as plt
 
 # Add utils directory to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
-
-from timing import time_function
-from plotting import plot_execution_times
 
 # Numba-compatible random number generator
 @jit(nopython=True)
@@ -58,7 +51,7 @@ def compute_fft_parallel(num_runs, size):
         data = generate_random_data(size)  # Generate random 1D data
         simplified_fft(data)  # Compute FFT
 
-# Main function for benchmarking and plotting
+# Main function for benchmarking and printing execution times
 if __name__ == "__main__":
     # Define problem sizes and other parameters
     problem_sizes = [2**i for i in range(13)]  # 2^0 to 2^12
@@ -74,13 +67,3 @@ if __name__ == "__main__":
         
         # Print execution time for this iteration
         print(f"Problem Size 2^{int(math.log2(size))}: Execution Time = {avg_time:.10f} seconds")
-
-    # Plot execution times
-    plot_execution_times(
-        problem_sizes,
-        [execution_times],
-        labels=["Parallel 1D FFT (Numba)"],
-        title="Execution Time vs. Problem Size for Parallel 1D FFT",
-        xlabel="Problem Size (2^N)",
-        ylabel="Execution Time (seconds)"
-    )
