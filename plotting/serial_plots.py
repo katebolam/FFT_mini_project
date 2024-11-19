@@ -62,7 +62,6 @@ plt.figure(figsize=(8, 5))
 plt.plot(processes, execution_time_1d_log, 'r--', label="1D serial FFT")
 plt.plot(processes, execution_time_2d_log, 'b--', label="2D serial FFT")
 
-# Labels, title, legend, and grid for logarithmic scale plot
 plt.xlabel("N(xN)")
 plt.ylabel("log(Execution Time) (s)")
 plt.legend()
