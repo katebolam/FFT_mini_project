@@ -84,10 +84,10 @@ Example commands to build and execute:
   python setup_2D.py build_ext --inplace
 - To run the 1D OpenMP FFT:
   ```bash
-  python OpenMP/test_1D_OpenMP_FFT.py
+  python OpenMP/run_1D_OpenMP_FFT.py
 - To run the 2D OpenMP FFT:
   ```bash
-  python OpenMP/test_2D_OpenMP_FFT.py
+  python OpenMP/run_2D_OpenMP_FFT.py
 - To run the 1D JIT FFT:
   ```bash
   python JIT/1D_JIT_FFT.py
