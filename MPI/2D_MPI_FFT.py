@@ -21,7 +21,7 @@ execution_times = []  # To store mean execution times for each problem size
 valid_sizes = []  # To store valid problem sizes for plotting
 
 # Number of runs for averaging
-num_runs = 10
+num_runs = 1
 
 # Scatter and collect times for each problem size
 for N in problem_sizes:

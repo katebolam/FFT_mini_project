@@ -16,7 +16,7 @@ problem_sizes = [2**i for i in range(13)]
 execution_times = []  # To store mean execution times for each problem size
 
 # Number of runs for averaging
-num_runs = 10
+num_runs = 1
 
 # Function to time the 2D FFT for multiprocessing
 def time_fft2(data):

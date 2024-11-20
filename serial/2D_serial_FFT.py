@@ -12,7 +12,7 @@ from timing import time_function
 
 # Define the problem sizes as powers of 2 from 2^0 to 2^8
 problem_sizes = [2**i for i in range(13)] 
-num_runs = 10  # Number of runs for averaging
+num_runs = 1  # Number of runs for averaging
 
 # Run the serial 2D FFT for each problem size and measure time
 for size in problem_sizes:

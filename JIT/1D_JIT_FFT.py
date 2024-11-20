@@ -55,7 +55,7 @@ def compute_fft_parallel(num_runs, size):
 if __name__ == "__main__":
     # Define problem sizes and other parameters
     problem_sizes = [2**i for i in range(13)]  # 2^0 to 2^12
-    num_runs = 10  # Number of iterations per problem size
+    num_runs = 1  # Number of iterations per problem size
     execution_times = []
 
     for size in problem_sizes:

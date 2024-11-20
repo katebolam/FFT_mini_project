@@ -17,7 +17,7 @@ def main():
 
     num_threads = args.threads  # Use the value passed from the SLURM script
     problem_sizes = [2**i for i in range(12, 29)]  # Define the problem sizes as powers of 2 from 2^12 to 2^28
-    num_runs = 10  # Number of runs for averaging
+    num_runs = 1  # Number of runs for averaging
 
     # Execution Time vs Problem Size 
     for size in problem_sizes:

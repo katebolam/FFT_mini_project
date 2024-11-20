@@ -71,7 +71,7 @@ def compute_fft_2d_parallel(num_runs, size):
 if __name__ == "__main__":
     # Define problem sizes (N x N) and other parameters
     problem_sizes = [2**i for i in range(13)] 
-    num_runs = 10  # Number of iterations per problem size
+    num_runs = 1  # Number of iterations per problem size
     execution_times = []
 
     # Benchmark each problem size
