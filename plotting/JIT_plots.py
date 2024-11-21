@@ -76,8 +76,8 @@ execution_time_2d_JIT_log = np.log10(execution_time_2d_linear_JIT)
 # --- 1D Plot ---
 plt.figure(figsize=(8, 5))
 # Solid lines for linear scale
-plt.plot(processes, execution_time_1d_serial_log, 'r--', label="1D serial FFT")
-plt.plot(processes, execution_time_1d_JIT_log, '-->', color= 'orange', label="1D JIT FFT")
+plt.plot(processes, execution_time_1d_serial_log, 'r--', label="1D serial FFT (i5)")
+plt.plot(processes, execution_time_1d_JIT_log, '-->', color= 'orange', label="1D JIT FFT (i5)")
 
 
 plt.xlabel("N")
@@ -88,8 +88,8 @@ plt.show()
 
 # --- 2D Plot ---
 plt.figure(figsize=(8, 5))
-plt.plot(processes, execution_time_2d_serial_log, 'b--', label="2D serial FFT")
-plt.plot(processes, execution_time_2d_JIT_log, '-->', color='orange', label="2D JIT FFT")
+plt.plot(processes, execution_time_2d_serial_log, 'r--', label="2D serial FFT (i5)")
+plt.plot(processes, execution_time_2d_JIT_log, '-->', color='orange', label="2D JIT FFT (i5)")
 
 plt.xlabel("NxN")
 plt.ylabel("log(Execution Time) (s)")
