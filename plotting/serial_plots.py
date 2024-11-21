@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 processes = 2 ** np.arange(12)  # 2^0 to 2^11
 
 # Define execution times for 1D and 2D FFT
-execution_time_1d_linear = np.array([
+execution_time_1d_linear_i5 = np.array([
     0.0001522000,  
     0.0000174000,  
     0.0000148000, 
@@ -17,11 +17,25 @@ execution_time_1d_linear = np.array([
     0.0000127000,  
     0.0000164000,  
     0.0000374000,  
-    0.0000604000, 
+    0.0000604000
 ])
 
+execution_time_1d_linear_bc = np.array(
+    [6.26800e-06, 
+     4.18220e-06,
+     3.46020e-06, 
+     2.87330e-06, 
+     2.91540e-06,
+     3.08960e-06, 
+     6.55260e-06, 
+     4.00880e-06, 
+     5.03320e-06, 
+     9.41830e-06,
+     1.39521e-05, 
+     3.02183e-05
+])
 
-execution_time_2d_linear = np.array([
+execution_time_2d_linear_i5 = np.array([
     0.0014131000,  
     0.0000526000, 
     0.0000425000,  
@@ -36,35 +50,67 @@ execution_time_2d_linear = np.array([
     0.8195974000  
 ])
 
-# Calculate log10 values of execution times
-execution_time_1d_log = np.log10(execution_time_1d_linear)
-execution_time_2d_log = np.log10(execution_time_2d_linear)
+execution_time_2d_linear_bc = np.array([
+    2.28763e-05, 
+    1.89539e-05, 
+    1.98456e-05, 
+    1.98822e-05, 
+    1.97466e-05, 
+    4.18754e-05, 
+    7.38969e-05, 
+    2.620971e-04, 
+    1.0741342e-03, 
+    4.9309270e-03, 
+    2.78509304e-02, 
+    1.726563882e-01
+])
 
-# --- Linear Scale Plot ---
+# Calculate log10 values of execution times
+execution_time_1d_log_i5 = np.log10(execution_time_1d_linear_i5)
+execution_time_2d_log_i5 = np.log10(execution_time_2d_linear_i5)
+execution_time_1d_log_bc = np.log10(execution_time_1d_linear_bc)
+execution_time_2d_log_bc = np.log10(execution_time_2d_linear_bc)
+
+# --- Linear 1D Scale Plot ---
 plt.figure(figsize=(8, 5))
 # Solid lines for linear scale
-plt.plot(processes, execution_time_1d_linear, 'r-', label="1D serial FFT")
-plt.plot(processes, execution_time_2d_linear, 'b-', label="2D serial FFT")
-
-
-plt.xlabel("N(xN)")
+plt.plot(processes, execution_time_1d_linear_i5, 'r-', label="1D serial i5")
+plt.plot(processes, execution_time_1d_linear_bc, 'b-', label="1D serial BC4")
+plt.xlabel("N")
 plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2) 
 plt.legend()
-
-
-# Show linear plot
 plt.show()
 
-# --- Logarithmic Scale Plot ---
+# --- Log 1D Scale Plot ---
 plt.figure(figsize=(8, 5))
-plt.plot(processes, execution_time_1d_log, 'r--', label="1D serial FFT")
-plt.plot(processes, execution_time_2d_log, 'b--', label="2D serial FFT")
+# Solid lines for linear scale
+plt.plot(processes, execution_time_1d_log_i5, 'r--', label="1D serial i5")
+plt.plot(processes, execution_time_1d_log_bc, 'b--', label="1D serial BC4")
+plt.xlabel("N")
+plt.ylabel("log(Execution Time (s))")
+plt.xscale('log', base=2) 
+plt.legend()
+plt.show()
 
-plt.xlabel("N(xN)")
+
+# --- Linear 2D Scale Plot ---
+plt.figure(figsize=(8, 5))
+# Solid lines for linear scale
+plt.plot(processes, execution_time_2d_linear_i5, 'r-', label="2D serial i5")
+plt.plot(processes, execution_time_2d_linear_bc, 'b-', label="2D serial BC4")
+plt.xlabel("N x N")
+plt.ylabel("Execution Time (s)")
+plt.xscale('log', base=2) 
+plt.legend()
+plt.show()
+
+# --- Log 2D Scale Plot ---
+plt.figure(figsize=(8, 5))
+plt.plot(processes, execution_time_2d_log_i5, 'r--', label="2D serial i5")
+plt.plot(processes, execution_time_2d_log_bc, 'b--', label="2D serial BC4")
+plt.xlabel("N x N")
 plt.ylabel("log(Execution Time) (s)")
 plt.legend()
 plt.xscale('log', base=2)  # Log scale for the x-axis with base 2
-
-# Show log scale plot
 plt.show()
