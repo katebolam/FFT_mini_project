@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load the data
-df = pd.read_csv("1D_OpenMP_FFT_times.csv")
+df = pd.read_csv("C:\\Users\\Kate\\OneDrive\\Documents\\Uni\\Y4\\Advanced Computational Physics\\FFT_mini_project\\plotting\\1D_OpenMP_FFT_times.csv")
 
 # Prepare the data for plotting
 problem_sizes = df['Problem Size']
