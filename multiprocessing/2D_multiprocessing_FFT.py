@@ -9,8 +9,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'u
 from timing import time_function
 from plotting import plot_execution_times
 
-# Define the problem sizes as powers of 2 for square matrices from 2^0 to 2^12
-problem_sizes = [2**i for i in range(13)]
+# Define the problem sizes as powers of 2 for square matrices from 2^0 to 2^10
+problem_sizes = [2**i for i in range(11)]
 execution_times = []  # To store mean execution times for each problem size
 
 # Number of runs for averaging
