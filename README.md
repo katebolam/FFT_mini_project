@@ -4,17 +4,17 @@ Parallelization of Fast Fourier Transform Algorithm and understand how the algor
 
 ## Overview
 
-This repository contains an implementation of the radix-2 Cooley-Tukey Fast Fourier Transform (FFT) algorithm, parallelized to run on both shared and distributed memory architectures. The project explores different parallelization techniques, developed and tested in the context of both four-core PC and high-performance computing environments.
+This repository contains an implementation of the Cooley-Tukey Fast Fourier Transform (FFT) algorithm, parallelized to run on both shared and distributed memory architectures. The project explores different parallelization techniques, developed and tested in the context of both four-core PC and high-performance computing environments.
 
 The project includes five main strands, each supporting both 1D and 2D FFTs:
 
 1. **Shared Memory Systems with OpenMP**
-   - Suitable for single or dual-socket CPU systems.
-   - Utilizes OpenMP for parallelization on multicore CPUs.
+   - Utilises OpenMP for parallelization on multicore CPUs.
+   - Supports both 1D and 2D FFTs.
 
 2. **Distributed Memory Systems with MPI**
-   - Suitable for multisocket or multinode systems.
    - Uses MPI to distribute data across multiple nodes or cores.
+   - Supports both 1D and 2D FFTs.
 
 3. **Multiprocessing for Shared Memory Systems**
    - Uses Python’s multiprocessing module to achieve parallelism on multicore systems without OpenMP.
@@ -72,7 +72,7 @@ Each parallelization technique supports both 1D and 2D FFTs, with four main exec
    - Built using `setup_2D.py` for Cython and OpenMP.
 
 3. **(Distributed Memory) 1D FFT** (`1D_MPI_FFT`)
-   - Uses MPI. Execute with `mpiexec` to distribute the computation.
+   - Uses MPI. Execute with `mpiexec` for distributed computation.
 
 4. **(Distributed Memory) 2D FFT** (`2D_MPI_FFT`)
    - Uses MPI. Execute with `mpiexec` for distributed computation.
@@ -84,10 +84,10 @@ Example commands to build and execute:
   python setup_2D.py build_ext --inplace
 - To run the 1D OpenMP FFT:
   ```bash
-  python OpenMP/run_1D_OpenMP_FFT.py
+  python OpenMP/run_1D_OpenMP_FFT.py --threads <num_threads>
 - To run the 2D OpenMP FFT:
   ```bash
-  python OpenMP/run_2D_OpenMP_FFT.py
+  python OpenMP/run_2D_OpenMP_FFT.py --threads <num_threads>
 - To run the 1D JIT FFT:
   ```bash
   python JIT/1D_JIT_FFT.py
@@ -102,10 +102,10 @@ Example commands to build and execute:
   mpiexec -np <num_processes> python MPI/2D_MPI_FFT.py
 - To run the 1D multiprocessing FFT:
   ```bash
-  python multiprocessing/1D_multiprocessing_FFT.py
+  python multiprocessing/1D_multiprocessing_FFT.py --processes <num_processes>
 - To run the 2D multiprocessing FFT: 
 ```bash
-  python multiprocessing/2D_multiprocessing_FFT.py
+  python multiprocessing/2D_multiprocessing_FFT.py --processes <num_processes>
 ```
 ## Benchmarking
 The purpose of this program is to benchmark parallelization strategies of the Cooley-Tukey FFT algorithm. Each parallel implementation measures and records 
