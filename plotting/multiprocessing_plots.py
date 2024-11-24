@@ -8,10 +8,11 @@ df_2D = pd.read_csv("C:\\Users\\Kate\\OneDrive\\Documents\\Uni\\Y4\\Advanced Com
 
 # Plot for 1D FFT linear
 plt.figure(figsize=(8, 5))
-problem_sizes_1D = df_1D['Problem size']
+problem_sizes_1D = df_1D['Problem Size']
 threads_columns_1D = df_1D.columns[1:]
 for column in threads_columns_1D:
-    plt.plot(problem_sizes_1D, df_1D[column], label=f'p = {column[2:]}')
+    linestyle = '--' if column == 'p=1' else '-'  # Make p=1 dashed
+    plt.plot(problem_sizes_1D, df_1D[column], label=f'p = {column[2:]}', linestyle=linestyle)
 plt.xlabel("N")
 plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2)
@@ -20,36 +21,43 @@ plt.show()
 
 # Plot for 1D FFT log
 plt.figure(figsize=(8, 5))
-problem_sizes_1D = df_1D['Problem size']
+problem_sizes_1D = df_1D['Problem Size']
 threads_columns_1D = df_1D.columns[1:]
 for column in threads_columns_1D:
-    plt.plot(problem_sizes_1D, np.log10(df_1D[column]), label=f'p = {column[2:]}')
+    linestyle = '--' if column == 'p=1' else '-'  # Make p=1 dashed
+    plt.plot(problem_sizes_1D, df_1D[column], label=f'p = {column[2:]}', linestyle=linestyle)
 plt.xlabel("N")
-plt.ylabel("log(Execution Time) (s)")
+plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2)
+plt.yscale('log')
+plt.minorticks_off()
 plt.legend()
 plt.show()
 
 # Plot for 2D FFT linear
 plt.figure(figsize=(8, 5))
-problem_sizes_2D = df_2D['Problem size']
+problem_sizes_2D = df_2D['Problem Size']
 threads_columns_2D = df_2D.columns[1:]
 for column in threads_columns_2D:
-    plt.plot(problem_sizes_2D, df_2D[column], label=f'p = {column[2:]}')
+    linestyle = '--' if column == 'p=1' else '-'  # Make p=1 dashed
+    plt.plot(problem_sizes_2D, df_2D[column], label=f'p = {column[2:]}', linestyle=linestyle)
 plt.xlabel("N x N")
-plt.ylabel("log(Execution Time) (s)")
+plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2)
 plt.legend()
 plt.show()
 
 # Plot for 2D FFT log
 plt.figure(figsize=(8, 5))
-problem_sizes_2D = df_2D['Problem size']
+problem_sizes_2D = df_2D['Problem Size']
 threads_columns_2D = df_2D.columns[1:]
 for column in threads_columns_2D:
-    plt.plot(problem_sizes_2D, np.log10(df_2D[column]), label=f'p = {column[2:]}')
+    linestyle = '--' if column == 'p=1' else '-'  # Make p=1 dashed
+    plt.plot(problem_sizes_2D, df_2D[column], label=f'p = {column[2:]}', linestyle=linestyle)
 plt.xlabel("N x N")
-plt.ylabel("log(Execution Time) (s)")
+plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2)
+plt.yscale('log')
+plt.minorticks_off()
 plt.legend()
 plt.show()

@@ -65,11 +65,6 @@ execution_time_2d_linear_bc = np.array([
     1.726563882e-01
 ])
 
-# Calculate log10 values of execution times
-execution_time_1d_log_i5 = np.log10(execution_time_1d_linear_i5)
-execution_time_2d_log_i5 = np.log10(execution_time_2d_linear_i5)
-execution_time_1d_log_bc = np.log10(execution_time_1d_linear_bc)
-execution_time_2d_log_bc = np.log10(execution_time_2d_linear_bc)
 
 # --- Linear 1D Scale Plot ---
 plt.figure(figsize=(8, 5))
@@ -85,11 +80,13 @@ plt.show()
 # --- Log 1D Scale Plot ---
 plt.figure(figsize=(8, 5))
 # Solid lines for linear scale
-plt.plot(processes, execution_time_1d_log_i5, 'r--', label="1D serial i5")
-plt.plot(processes, execution_time_1d_log_bc, 'b--', label="1D serial BC4")
+plt.plot(processes, execution_time_1d_linear_i5, 'r--', label="1D serial i5")
+plt.plot(processes, execution_time_1d_linear_bc, 'b--', label="1D serial BC4")
 plt.xlabel("N")
-plt.ylabel("log(Execution Time (s))")
+plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2) 
+plt.yscale('log')
+plt.minorticks_off()
 plt.legend()
 plt.show()
 
@@ -107,10 +104,12 @@ plt.show()
 
 # --- Log 2D Scale Plot ---
 plt.figure(figsize=(8, 5))
-plt.plot(processes, execution_time_2d_log_i5, 'r--', label="2D serial i5")
-plt.plot(processes, execution_time_2d_log_bc, 'b--', label="2D serial BC4")
+plt.plot(processes, execution_time_2d_linear_i5, 'r--', label="2D serial i5")
+plt.plot(processes, execution_time_2d_linear_bc, 'b--', label="2D serial BC4")
 plt.xlabel("N x N")
-plt.ylabel("log(Execution Time) (s)")
+plt.ylabel("Execution Time (s)")
+plt.yscale('log')
+plt.minorticks_off()
 plt.legend()
-plt.xscale('log', base=2)  # Log scale for the x-axis with base 2
+plt.xscale('log', base=2)  
 plt.show()

@@ -37,18 +37,18 @@ execution_time_1d_linear_JIT = np.array([
 ])
 
 execution_time_2d_linear_serial = np.array([
-    0.0000531000,  # 1x1
-    0.0000526000,  # 4x4
-    0.0000425000,  # 8x8
-    0.0000867000,  # 16x16
-    0.0001032000,  # 32x32
-    0.0001783000,  # 64x64
-    0.0004642000,  # 128x128
-    0.0019401000,  # 256x256
-    0.0078036000,  # 512x512
-    0.0369520000,  # 1024x1024
-    0.1847571000,  # 2048x2048
-    0.8195974000   # 4096x4096
+    0.0000531000,  
+    0.0000526000,  
+    0.0000425000,  
+    0.0000867000,  
+    0.0001032000,  
+    0.0001783000,  
+    0.0004642000,  
+    0.0019401000,  
+    0.0078036000,  
+    0.0369520000,  
+    0.1847571000,  
+    0.8195974000   
 ])
 execution_time_2d_linear_JIT = np.array([
     0.0000386000,
@@ -65,34 +65,29 @@ execution_time_2d_linear_JIT = np.array([
     666.0349002000
 ])
 
-# Calculate log10 values of execution times
-execution_time_1d_serial_log = np.log10(execution_time_1d_linear_serial)
-execution_time_1d_JIT_log = np.log10(execution_time_1d_linear_JIT)
-
-execution_time_2d_serial_log = np.log10(execution_time_2d_linear_serial)
-execution_time_2d_JIT_log = np.log10(execution_time_2d_linear_JIT)
 
 
 # --- 1D Plot ---
 plt.figure(figsize=(8, 5))
 # Solid lines for linear scale
-plt.plot(processes, execution_time_1d_serial_log, 'r--', label="1D serial FFT (i5)")
-plt.plot(processes, execution_time_1d_JIT_log, '-->', color= 'orange', label="1D JIT FFT (i5)")
-
-
+plt.plot(processes, execution_time_1d_linear_serial, 'r--', label="1D serial FFT (i5)")
+plt.plot(processes, execution_time_1d_linear_JIT, '->', color= 'orange', label="1D JIT FFT (i5)")
 plt.xlabel("N")
-plt.ylabel("log(Execution Time) (s)")
+plt.ylabel("Execution Time (s)")
 plt.xscale('log', base=2) 
+plt.yscale('log')
+plt.minorticks_off()
 plt.legend()
 plt.show()
 
 # --- 2D Plot ---
 plt.figure(figsize=(8, 5))
-plt.plot(processes, execution_time_2d_serial_log, 'r--', label="2D serial FFT (i5)")
-plt.plot(processes, execution_time_2d_JIT_log, '-->', color='orange', label="2D JIT FFT (i5)")
-
-plt.xlabel("NxN")
-plt.ylabel("log(Execution Time) (s)")
+plt.plot(processes, execution_time_2d_linear_serial, 'r--', label="2D serial FFT (i5)")
+plt.plot(processes, execution_time_2d_linear_JIT, '->', color='orange', label="2D JIT FFT (i5)")
+plt.xlabel("N x N")
+plt.ylabel("Execution Time (s)")
 plt.legend()
+plt.yscale('log')
+plt.minorticks_off()
 plt.xscale('log', base=2)  # Log scale for the x-axis with base 2
 plt.show()
