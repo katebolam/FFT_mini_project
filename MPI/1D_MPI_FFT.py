@@ -55,16 +55,4 @@ for N in problem_sizes:
         valid_sizes.append(N)  # Add only valid N values
         print(f"1D (MPI) FFT Execution Time for N={N}: {mean_time:.10f} seconds")
 
-# Plot the execution times only if execution_times has data
-if rank == 0 and execution_times:
-    plot_execution_times(
-        valid_sizes,  # Use valid sizes that were processed
-        [execution_times],  
-        labels=["MPI 1D FFT"], 
-        title="1D FFT MPI Execution Time vs. Problem Size",
-        xlabel="Problem Size (2^N)",
-        ylabel="Execution Time (seconds)"
-    )
-else:
-    if rank == 0:
-        print("No data to plot.")
+
