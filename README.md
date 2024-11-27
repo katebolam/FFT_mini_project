@@ -56,6 +56,16 @@ This repository is organised into the following directories:
   - `1D_serial_FFT.py`: Serial 1D FFT implementation.
   - `2D_serial_FFT.py`: Serial 2D FFT implementation.
 
+ - **`slurm/`**: SLURM job scripts (as `.sh` files) for executing FFT implementations on an HPC cluster.
+  - `run_1D_MPI_FFT.sh`: SLURM script for running the 1D MPI FFT.
+  - `run_2D_MPI_FFT.sh`: SLURM script for running the 2D MPI FFT.
+  - `run_1D_OpenMP_FFT.sh`: SLURM script for running the 1D OpenMP FFT.
+  - `run_2D_OpenMP_FFT.sh`: SLURM script for running the 2D OpenMP FFT.
+  - `run_1D_multiprocessing_FFT.sh`: SLURM script for running the 1D multiprocessing FFT.
+  - `run_2D_multiprocessing_FFT.sh`: SLURM script for running the 2D multiprocessing FFT.
+  - `run_1D_serial_FFT.sh`: SLURM script for running the 1D serial FFT.
+  - `run_2D_serial_FFT.sh`: SLURM script for running the 2D serial FFT.
+
 - **`utils/`**: Helper modules for timing and plotting, used for benchmarking and visualizing results.
   - `timing.py`: Functions for measuring execution time.
   - `plotting.py`: Functions for plotting execution time vs. problem size.
