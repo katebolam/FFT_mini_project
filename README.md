@@ -1,6 +1,6 @@
 # Parallelizing the Fast Fourier Transform Algorithm
 
-Parallelization of Fast Fourier Transform Algorithm and understand how the algorithm perfomance scales with degree of parallelization and problem size.
+Parallelization of Fast Fourier Transform Algorithm to test performance and scalability for various parallelization methods.
 
 ## Overview
 
