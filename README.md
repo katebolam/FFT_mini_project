@@ -84,28 +84,28 @@ Example commands to build and execute:
   python setup_2D.py build_ext --inplace
 - To run the 1D OpenMP FFT:
   ```bash
-  python OpenMP/run_1D_OpenMP_FFT.py --threads <num_threads>
+  python src/OpenMP/run_1D_OpenMP_FFT.py --threads <num_threads>
 - To run the 2D OpenMP FFT:
   ```bash
-  python OpenMP/run_2D_OpenMP_FFT.py --threads <num_threads>
+  python src/OpenMP/run_2D_OpenMP_FFT.py --threads <num_threads>
 - To run the 1D JIT FFT:
   ```bash
-  python JIT/1D_JIT_FFT.py
+  python src/JIT/1D_JIT_FFT.py
 - To run the 2D JIT FFT:
   ```bash
-  python JIT/2D_JIT_FFT.py
+  python src/JIT/2D_JIT_FFT.py
 - To run the 1D MPI FFT:
   ```bash
-  mpiexec -np <num_processes> python MPI/1D_MPI_FFT.py
+  mpiexec -np <num_processes> python src/MPI/1D_MPI_FFT.py
 - To run the 2D MPI FFT:
   ```bash
-  mpiexec -np <num_processes> python MPI/2D_MPI_FFT.py
+  mpiexec -np <num_processes> python src/MPI/2D_MPI_FFT.py
 - To run the 1D multiprocessing FFT:
   ```bash
-  python multiprocessing/1D_multiprocessing_FFT.py --processes <num_processes>
+  python src/multiprocessing/1D_multiprocessing_FFT.py --processes <num_processes>
 - To run the 2D multiprocessing FFT: 
 ```bash
-  python multiprocessing/2D_multiprocessing_FFT.py --processes <num_processes>
+  python src/multiprocessing/2D_multiprocessing_FFT.py --processes <num_processes>
 ```
 ## Benchmarking
 The purpose of this program is to benchmark parallelization strategies of the Cooley-Tukey FFT algorithm. Each parallel implementation measures and records 
