@@ -1,3 +1,14 @@
+"""
+# 2D_MPI_FFT.py
+
+This script implements a distributed-memory parallelized 2D Fast Fourier Transform (FFT) using MPI (Message Passing Interface).
+
+Dependencies: 
+- mpi4py
+- NumPy
+
+"""
+
 from mpi4py import MPI
 import numpy as np
 from numpy.fft import fft2

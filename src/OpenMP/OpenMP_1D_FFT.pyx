@@ -1,3 +1,15 @@
+"""
+# OpenMP_1D_FFT.pyx
+
+This file contains the Cython implementation of a 1D Fast Fourier Transform (FFT) using OpenMP for shared memory parallelization.
+
+Dependencies:
+- Cython
+- OpenMP
+- NumPy
+
+"""
+
 # cython: language_level=3
 # cython: boundscheck=False
 # cython: wraparound=False

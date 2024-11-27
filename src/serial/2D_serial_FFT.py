@@ -1,6 +1,12 @@
-# this script implements a 2D fast-fourier transform (FFT) for a serial (unparallelised case), and stores the execution
-# times as a function of problem size (NxN)
+"""
+# 2D_serial_FFT.py
 
+This script implements a baseline serial version of the 2D Fast Fourier Transform (FFT) for benchmarking against parallelized versions.
+
+Dependencies: 
+- NumPy
+
+"""
 import numpy as np
 import sys
 import os

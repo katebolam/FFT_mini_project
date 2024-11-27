@@ -1,3 +1,14 @@
+"""
+# 2D_multiprocessing_FFT.py
+
+This script implements a parallelized 2D Fast Fourier Transform (FFT) using Python's `multiprocessing` module for shared memory parallelization.
+
+Dependencies: 
+- NumPy
+- multiprocessing (built-in)
+
+"""
+
 import argparse
 import numpy as np
 import sys

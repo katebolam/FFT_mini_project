@@ -1,3 +1,14 @@
+"""
+# 2D_JIT_FFT.py
+
+This script implements a parallelized 2D Fast Fourier Transform (FFT) using Numba's Just-In-Time (JIT) compilation to optimise performance. 
+
+Dependencies: 
+- Numba
+- NumPy
+
+"""
+
 import sys
 import os
 from numba import jit, prange

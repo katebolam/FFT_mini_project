@@ -1,3 +1,14 @@
+"""
+# 1D_multiprocessing_FFT.py
+
+This script implements a parallelized 1D Fast Fourier Transform (FFT) using Python's `multiprocessing` module for shared memory parallelization.
+
+Dependencies: 
+- NumPy
+- multiprocessing (built-in)
+
+"""
+
 import argparse
 from multiprocessing import Pool
 import numpy as np
