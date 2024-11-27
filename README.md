@@ -30,33 +30,34 @@ The project includes five main strands, each supporting both 1D and 2D FFTs:
 
 ## Structure
 
-This repository is organised into the following directories:
+This repository is organized into the following directories:
 
-- **`JIT/`**: Contains Numba JIT-based implementations for shared memory parallelization.
-  - `1D_JIT_FFT.py`: Parallelized 1D FFT using Numba JIT.
-  - `2D_JIT_FFT.py`: Parallelized 2D FFT using Numba JIT.
+- **`src/`**: Contains the source code for various FFT implementations.
+  - **`JIT/`**: Numba JIT-based implementations for shared memory parallelization.
+    - `1D_JIT_FFT.py`: Parallelized 1D FFT using Numba JIT.
+    - `2D_JIT_FFT.py`: Parallelized 2D FFT using Numba JIT.
+  - **`MPI/`**: MPI-based implementations targeting distributed memory systems.
+    - `1D_MPI_FFT.py`: MPI-parallelized 1D FFT.
+    - `2D_MPI_FFT.py`: MPI-parallelized 2D FFT.
+  - **`OpenMP/`**: OpenMP-based implementations written in Cython for shared memory parallelization.
+    - `OpenMP_1D_FFT.pyx`: OpenMP-parallelized 1D FFT.
+    - `OpenMP_2D_FFT.pyx`: OpenMP-parallelized 2D FFT.
+    - `setup_1D.py`: Build script for compiling 1D OpenMP FFT.
+    - `setup_2D.py`: Build script for compiling 2D OpenMP FFT.
+    - `run_1D_OpenMP_FFT.py`: Executes and measures execution time for 1D OpenMP FFT across various problem sizes.
+    - `run_2D_OpenMP_FFT.py`: Executes and measures execution time for 2D OpenMP FFT across various problem sizes.
+  - **`multiprocessing/`**: FFT implementations using Python’s multiprocessing module for parallelism on shared memory systems.
+    - `1D_multiprocessing_FFT.py`: Multiprocessing-based 1D FFT.
+    - `2D_multiprocessing_FFT.py`: Multiprocessing-based 2D FFT.
+  - **`serial/`**: Baseline serial implementations of the FFT algorithm.
+    - `1D_serial_FFT.py`: Serial 1D FFT implementation.
+    - `2D_serial_FFT.py`: Serial 2D FFT implementation.
 
-- **`MPI/`**: Contains MPI-based implementations for both 1D and 2D FFTs, targeting distributed memory systems.
-  - `1D_MPI_FFT.py`: MPI-parallelized 1D FFT.
-  - `2D_MPI_FFT.py`: MPI-parallelized 2D FFT.
+- **`utils/`**: Helper modules for timing and plotting, used for benchmarking and visualizing results.
+  - `timing.py`: Functions for measuring execution time.
+  - `plotting.py`: Functions for plotting execution time vs. problem size.
 
-- **`OpenMP/`**: Contains OpenMP-based implementations written in Cython for shared memory parallelization.
-  - `OpenMP_1D_FFT.pyx`: OpenMP-parallelized 1D FFT.
-  - `OpenMP_2D_FFT.pyx`: OpenMP-parallelized 2D FFT.
-  - `setup_1D.py`: Build script for compiling 1D OpenMP FFT.
-  - `setup_2D.py`: Build script for compiling 2D OpenMP FFT.
-  - `run_1D_OpenMP_FFT.py`: Runs and measures execution time for 1D OpenMP FFT across various problem sizes.
-  - `run_2D_OpenMP_FFT.py`: Runs and measures execution time for 2D OpenMP FFT across various problem sizes.
-
-- **`multiprocessing/`**: Contains FFT implementations using Python’s multiprocessing module for parallelism on shared memory systems.
-  - `1D_multiprocessing_FFT.py`: Multiprocessing-based 1D FFT.
-  - `2D_multiprocessing_FFT.py`: Multiprocessing-based 2D FFT.
-
-- **`serial/`**: Baseline serial implementations of the FFT algorithm.
-  - `1D_serial_FFT.py`: Serial 1D FFT implementation.
-  - `2D_serial_FFT.py`: Serial 2D FFT implementation.
-
- - **`slurm/`**: SLURM job scripts (as `.sh` files) for executing FFT implementations on an HPC cluster.
+- **`slurm/`**: SLURM job scripts for executing FFT implementations on an HPC cluster (BC4).
   - `run_1D_MPI_FFT.sh`: SLURM script for running the 1D MPI FFT.
   - `run_2D_MPI_FFT.sh`: SLURM script for running the 2D MPI FFT.
   - `run_1D_OpenMP_FFT.sh`: SLURM script for running the 1D OpenMP FFT.
@@ -66,10 +67,9 @@ This repository is organised into the following directories:
   - `run_1D_serial_FFT.sh`: SLURM script for running the 1D serial FFT.
   - `run_2D_serial_FFT.sh`: SLURM script for running the 2D serial FFT.
 
-- **`utils/`**: Helper modules for timing and plotting, used for benchmarking and visualizing results.
-  - `timing.py`: Functions for measuring execution time.
-  - `plotting.py`: Functions for plotting execution time vs. problem size.
+- **`data/`**: Contains CSV files with execution time results for each parallelization method.
 
+- **`build/`**: Stores compiled files and build artifacts generated during the compilation of OpenMP FFT implementations.
 
 ## Executables and Usage
 
