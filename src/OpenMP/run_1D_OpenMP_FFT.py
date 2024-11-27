@@ -5,7 +5,9 @@ import os
 
 # Add utils and OpenMP directories to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'OpenMP')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+# Add the utils directory to the path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'utils')))
+
 from OpenMP_1D_FFT import fft_1d_parallel
 from timing import time_function
 

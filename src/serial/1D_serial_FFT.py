@@ -5,9 +5,10 @@ import numpy as np
 import sys
 import os
 
-# Add utils directory to the path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+# Add the utils directory to the path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'utils')))
 
+# Import the timing module
 from timing import time_function
 
 # Define the problem sizes as powers of 2 from 2^0 to 2^8

@@ -5,7 +5,9 @@ import os
 
 # Add utils and OpenMP directories to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'OpenMP')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+# Add the utils directory to the path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'utils')))
+
 from OpenMP_2D_FFT import fft_2d_parallel
 from timing import time_function
 
@@ -14,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--threads', type=int, help='Number of threads for parallel processing')
     args = parser.parse_args()
-
+    
     num_threads = args.threads  # Use the value passed from the SLURM script
     problem_sizes = [2**i for i in range(12, 29)]  # Define the problem sizes as powers of 2 from 2^12 to 2^28
     num_runs = 1  # Number of runs for averaging

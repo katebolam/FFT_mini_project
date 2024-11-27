@@ -4,8 +4,8 @@ from numba import jit, prange
 import math
 import time
 
-# Add utils directory to the path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+# Add the utils directory to the path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'utils')))
 
 # Numba-compatible random number generator
 @jit(nopython=True)
