@@ -104,9 +104,9 @@ Example commands to build and execute:
   ```bash
   python src/multiprocessing/1D_multiprocessing_FFT.py --processes <num_processes>
 - To run the 2D multiprocessing FFT: 
-```bash
+   ```bash
   python src/multiprocessing/2D_multiprocessing_FFT.py --processes <num_processes>
-```
+   ```
 ## Benchmarking
 The purpose of this program is to benchmark parallelization strategies of the Cooley-Tukey FFT algorithm. Each parallel implementation measures and records 
 execution time for a range of problem sizes (powers of 2), which can be plotted for performance analysis.
